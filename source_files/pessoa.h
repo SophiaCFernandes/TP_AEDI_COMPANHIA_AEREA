@@ -28,6 +28,8 @@ public:
 
     string getPessoa();
     string getTelefone();
+
+    int armazenaDadosEmArquivo(string arquivo, string dados);
 };
 
 #endif

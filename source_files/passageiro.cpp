@@ -1,6 +1,6 @@
 #include "passageiro.h"
 
-#define FILE_PASSAGEIRO
+#define FILE_PASSAGEIRO "../data_files/passageiro.txt"
 
 int maiorCodigo = 0;
 
@@ -62,7 +62,7 @@ void Passageiro::mostrarPessoa(){
     cout << "Codigo: " << getCodigo() << endl;
 }
 
-void Passageiro::adicionaPassageiro(){
+void adicionaPassageiro(){
     string nome, telefone, endereco;
     Passageiro p;
 
@@ -81,4 +81,12 @@ void Passageiro::adicionaPassageiro(){
     p.setCodigo();
 
     cout << "Cadastro adicionado com sucesso!" << endl;
+    
+    if(p.armazenaDadosEmArquivo(FILE_PASSAGEIRO, p.criaStringDeDados()) == -1){
+        cout << "Erro ao salvar em arquivo!";
+    }
+    else{
+        cout << "Informacoes salvas arquivo!";
+    }
 }
+

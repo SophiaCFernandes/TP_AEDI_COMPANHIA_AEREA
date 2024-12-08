@@ -36,3 +36,20 @@ string Pessoa::getPessoa(){
 string Pessoa::getTelefone(){
     return telefone;
 }
+
+/**
+ * Metodo que armazena os dados da pessoa no arquivo
+ * Entrada: string arquivo, string dados
+ * Retorna: -1 em caso de erro, 0 em caso de sucesso
+ */
+int Pessoa::armazenaDadosEmArquivo(string arquivo, string dados) {
+    ofstream arquivoEscrita(arquivo, ios::app);
+    if (!arquivoEscrita.is_open()) {
+        cerr << "Erro ao abrir o arquivo " << arquivo << " para escrita.\n";
+        return -1;
+    }
+
+    arquivoEscrita << dados;
+    arquivoEscrita.close();
+    return 0;
+}
