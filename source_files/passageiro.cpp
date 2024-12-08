@@ -62,10 +62,11 @@ void Passageiro::mostrarPessoa(){
     cout << "Codigo: " << getCodigo() << endl;
 }
 
-void adicionaPassageiro(){
-    string nome, telefone, endereco;
-    Passageiro p;
-
+/**
+ * Metodo para adicionar novos passageiros
+ */
+void Passageiro::adicionaPassageiro(Passageiro &p){
+    
     cout << "Digite o nome do passageiro: ";
     cin.ignore(); //Limpa o buffer de entrada do primeiro getline
     getline(cin, nome);
@@ -83,10 +84,14 @@ void adicionaPassageiro(){
     cout << "Cadastro adicionado com sucesso!" << endl;
     
     if(p.armazenaDadosEmArquivo(FILE_PASSAGEIRO, p.criaStringDeDados()) == -1){
-        cout << "Erro ao salvar em arquivo!";
+        cout << "\nErro ao salvar em arquivo!\n";
     }
     else{
-        cout << "Informacoes salvas arquivo!";
+        cout << "\nInformacoes salvas em arquivo!\n";
     }
 }
 
+// void Passageiro::atualizaPassageiro(){
+
+
+// }

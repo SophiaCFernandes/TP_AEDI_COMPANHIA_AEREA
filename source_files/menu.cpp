@@ -170,6 +170,9 @@ void menu_reserva() {
  */
 void menu_passageiro(){
     bool exit = false;
+    
+    string nome, telefone, endereco;
+    Passageiro p;
 
     while (!exit) {
         cout << "\n*** Gerenciar Passageiros ***\n"
@@ -184,12 +187,12 @@ void menu_passageiro(){
 
         switch (input) {
             case 1: {
-                // cout << "Funcao de incluir passageiro ainda nao implementada.\n";
-                adicionaPassageiro();
+                p.adicionaPassageiro(p);
                 break;
             }
             case 2:
-                cout << "Funcao de atualizar passageiro ainda nao implementada.\n";
+                // p.atulizaPassageiro();
+                // cout << "Funcao de atualizar passageiro ainda nao implementada.\n";
                 break;
             case 3:
                 cout << "Funcao de buscar passageiro ainda nao implementada.\n";
