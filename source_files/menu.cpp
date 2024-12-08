@@ -193,9 +193,7 @@ void menu_passageiro(){
             case 2:
                 cout << "Digite o codigo de passageiro que voce deseja atualizar: " << endl;
                 cin >> codigo;
-                // p.atulizaPassageiro();
-
-                // cout << "Funcao de atualizar passageiro ainda nao implementada.\n";
+                p.atulizaPassageiro(codigo, p);
                 break;
             case 3:
                 cout << "Digite o codigo de passageiro que voce deseja buscar: " << endl;

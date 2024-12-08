@@ -25,8 +25,7 @@ public:
     void mostrarPessoa();
     void adicionaPassageiro(Passageiro &p);
     void buscaPassageiro(string codigo);
-
-    void atulizaPassageiro();
+    void atulizaPassageiro(string codigo, Passageiro &p);
 };
 
 #endif

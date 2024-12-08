@@ -171,4 +171,72 @@ void Passageiro::buscaPassageiro(string codigo) {
     }
 }
 
+/**
+ * Metodo para atualizar novos passageiros
+ */
+void Passageiro::atulizaPassageiro(string codigo, Passageiro &p) {
+    // Primeiro busca o passageiro pelo codigo
+    p.buscaPassageiro(codigo);
 
+    // Pergunta se deseja atualizar os dados
+    char escolha;
+    cout << "Deseja atualizar as informacoes deste passageiro? (s/n): ";
+    cin >> escolha;
+
+    if (tolower(escolha) != 's') {
+        cout << "Atualizacao cancelada." << endl;
+        return;
+    }
+
+    // Solicita novas informacoes
+    string novoNome, novoTelefone, novoEndereco;
+
+    cout << "Digite o novo nome (ou pressione Enter para manter o atual): ";
+    cin.ignore();
+    getline(cin, novoNome);
+
+    cout << "Digite o novo telefone (ou pressione Enter para manter o atual): ";
+    getline(cin, novoTelefone);
+
+    cout << "Digite o novo endereco (ou pressione Enter para manter o atual): ";
+    getline(cin, novoEndereco);
+
+    // Atualiza apenas se o usuario informou novos dados
+    if (!novoNome.empty()) {
+        p.setPessoa(novoNome);
+    }
+    if (!novoTelefone.empty()) {
+        p.setTelefone(novoTelefone);
+    }
+    if (!novoEndereco.empty()) {
+        p.setEndereco(novoEndereco);
+    }
+
+    // Atualiza o arquivo
+    ifstream arq_entrada(FILE_PASSAGEIRO);
+    ofstream arq_temp("temp.txt");
+
+    if (!arq_entrada.is_open() || !arq_temp.is_open()) {
+        cout << "Erro ao abrir os arquivos para atualizacao." << endl;
+        return;
+    }
+
+    string linha;
+    while (getline(arq_entrada, linha)) {
+        // Substitui a linha do passageiro pelo conteudo atualizado
+        if (linha.find(codigo + ",") == 0) {
+            arq_temp << p.criaStringDeDados(); // Insere os dados atualizados
+        } else {
+            arq_temp << linha << endl; // Mantem os outros registros
+        }
+    }
+
+    arq_entrada.close();
+    arq_temp.close();
+
+    // Substitui o arquivo original pelo atualizado
+    remove(FILE_PASSAGEIRO);
+    rename("temp.txt", FILE_PASSAGEIRO);
+
+    cout << "Passageiro atualizado com sucesso!" << endl;
+}
