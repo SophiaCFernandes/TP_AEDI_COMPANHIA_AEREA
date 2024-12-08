@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "passageiro.h"
+#include "tripulacao.h"
 #include <iostream>
 
 using namespace std;
@@ -171,7 +172,7 @@ void menu_reserva() {
 void menu_passageiro(){
     bool exit = false;
     
-    string nome, telefone, endereco, codigo;
+    string nome, codigo;
     Passageiro p;
 
     while (!exit) {
@@ -221,6 +222,8 @@ void menu_passageiro(){
  */
 void menu_tripulacao(){
     bool exit = false;
+    string nome, telefone, cargo, codigo;
+    Tripulacao p;
 
     while (!exit) {
         cout << "\n*** Gerenciar Tripulacao ***\n"
@@ -235,17 +238,23 @@ void menu_tripulacao(){
 
         switch (input) {
             case 1: {
-                cout << "Funcao de incluir tripulacao ainda nao implementada.\n";
+                p.adicionaTripulacao();
                 break;
             }
             case 2:
-                cout << "Funcao de atualizar tripulacao ainda nao implementada.\n";
+                cout << "Digite o codigo de tripulacao que voce deseja atualizar: " << endl;
+                cin >> codigo;
+                p.atulizaTripulacao(codigo, p);
                 break;
             case 3:
-                cout << "Funcao de buscar tripulacao ainda nao implementada.\n";
+                cout << "Digite o codigo de tripulacao que voce deseja atualizar: " << endl;
+                cin >> codigo;
+                p.buscaTripulacao(codigo);
                 break;
             case 4:
-                cout << "Funcao de excluir tripulacao ainda nao implementada.\n";
+                cout << "Digite o codigo de tripulacao que voce deseja excluir: " << endl;
+                cin >> codigo;
+                p.excluirTripulacao(codigo, p);
                 break;
             case 5:
                 cout << "Retornando ao menu principal...\n";
