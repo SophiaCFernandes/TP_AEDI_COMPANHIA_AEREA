@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "passageiro.h"
 #include <iostream>
 
 using namespace std;
@@ -183,7 +184,8 @@ void menu_passageiro(){
 
         switch (input) {
             case 1: {
-                cout << "Funcao de incluir passageiro ainda nao implementada.\n";
+                // cout << "Funcao de incluir passageiro ainda nao implementada.\n";
+                adicionaPassageiro();
                 break;
             }
             case 2:
