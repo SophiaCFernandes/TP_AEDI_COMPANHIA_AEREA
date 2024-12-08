@@ -22,8 +22,8 @@ public:
     string getCodigo();
 
     void mostrarPessoa();
+    void adicionaPassageiro();
 };
 
-void adicionaPassageiro();
 
 #endif

@@ -1,5 +1,7 @@
 #include "passageiro.h"
 
+#define FILE_PASSAGEIRO
+
 int maiorCodigo = 0;
 
 /**
@@ -60,7 +62,7 @@ void Passageiro::mostrarPessoa(){
     cout << "Codigo: " << getCodigo() << endl;
 }
 
-void adicionaPassageiro(){
+void Passageiro::adicionaPassageiro(){
     string nome, telefone, endereco;
     Passageiro p;
 
