@@ -2,7 +2,7 @@
 
 #define FILE_PASSAGEIRO "../data_files/passageiro.txt"
 
-int maiorCodigo = 0;
+// int maiorCodigo = 0;
 
 /**
  * Construtor padrao da classe Passageiro
@@ -41,9 +41,40 @@ string Passageiro::getEndereco(){
 /**
  * Metodo para definir acessar e definir o atributo codigo da classe pessoa
  */
-void Passageiro::setCodigo(){
-    this->codigo = "P" + to_string(maiorCodigo++);
+void Passageiro::setCodigo() {
+    int maiorCodigoAtual = 0;
+    string linha;
+
+    // Abre o arquivo para leitura
+    ifstream arq_entrada(FILE_PASSAGEIRO);
+
+    if (!arq_entrada.is_open()) {
+        cout << "Erro ao abrir o arquivo de passageiros para leitura." << endl;
+        return;
+    }
+
+    // Percorre todas as linhas do arquivo
+    while (getline(arq_entrada, linha)) {
+        // Extrai o codigo (considerando que o codigo esta antes da primeira virgula)
+        size_t pos = linha.find(",");
+        if (pos != string::npos) {
+            string codigoExtraido = linha.substr(0, pos);
+            // Remove o prefixo "P" e converte para numero
+            if (codigoExtraido[0] == 'P') {
+                int codigoNumerico = stoi(codigoExtraido.substr(1));
+                if (codigoNumerico > maiorCodigoAtual) {
+                    maiorCodigoAtual = codigoNumerico;
+                }
+            }
+        }
+    }
+
+    arq_entrada.close();
+
+    // Define o novo codigo incrementando o maior codigo encontrado
+    this->codigo = "P" + to_string(maiorCodigoAtual + 1);
 }
+
 
 /**
  * Metodo para definir acessar o atributo codigo da classe pessoa
