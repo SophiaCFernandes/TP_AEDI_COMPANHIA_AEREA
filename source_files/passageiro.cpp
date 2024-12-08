@@ -75,6 +75,12 @@ void Passageiro::setCodigo() {
     this->codigo = "P" + to_string(maiorCodigoAtual + 1);
 }
 
+/**
+ * Metodo auxiliar para setar codigo na busca
+ */
+void Passageiro::setCodigo(string codigo) {
+    this->codigo = codigo;
+}
 
 /**
  * Metodo para definir acessar o atributo codigo da classe pessoa
@@ -152,7 +158,7 @@ void Passageiro::buscaPassageiro(string codigo) {
 
             // Preenche os atributos do objeto atual
             if (partes.size() >= 4) { // Certifica que ha ao menos 4 partes
-                setCodigo();
+                setCodigo(codigo);
                 setPessoa(partes[1]);    // Nome
                 setTelefone(partes[2]);  // Telefone
                 setEndereco(partes[3]);  // Endereco
@@ -239,4 +245,54 @@ void Passageiro::atulizaPassageiro(string codigo, Passageiro &p) {
     rename("temp.txt", FILE_PASSAGEIRO);
 
     cout << "Passageiro atualizado com sucesso!" << endl;
+}
+
+/**
+ * Metodo para excluir passageiros
+ */
+void Passageiro::excluirPassageiro(string codigo, Passageiro &p) {
+    // Primeiro busca o passageiro pelo codigo
+    p.buscaPassageiro(codigo);
+    // Pergunta se deseja excluir o passageiro
+    char escolha;
+    cout << "Deseja excluir este passageiro? (s/n): ";
+    cin >> escolha;
+
+    if (tolower(escolha) != 's') {
+        cout << "Exclusao cancelada." << endl;
+        return;
+    }
+
+    // Atualiza o arquivo
+    ifstream arq_entrada(FILE_PASSAGEIRO);
+    ofstream arq_temp("temp.txt");
+
+    if (!arq_entrada.is_open() || !arq_temp.is_open()) {
+        cout << "Erro ao abrir os arquivos para exclusao." << endl;
+        return;
+    }
+
+    string linha;
+    bool encontrado = false;
+
+    while (getline(arq_entrada, linha)) {
+        // Se encontrar o passageiro pelo codigo, nao escreve essa linha no arquivo temporario
+        if (linha.find(codigo + ",") == 0) {
+            encontrado = true;
+            cout << "Passageiro excluido com sucesso!" << endl;
+        } else {
+            arq_temp << linha << endl; // Mantem os outros registros
+        }
+    }
+
+    if (!encontrado) {
+        cout << "Passageiro nao encontrado!" << endl;
+    }
+
+    arq_entrada.close();
+    arq_temp.close();
+
+    // Substitui o arquivo original pelo atualizado
+    remove(FILE_PASSAGEIRO);
+    rename("temp.txt", FILE_PASSAGEIRO);
 }

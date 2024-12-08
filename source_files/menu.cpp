@@ -201,7 +201,9 @@ void menu_passageiro(){
                 p.buscaPassageiro(codigo);
                 break;
             case 4:
-                cout << "Funcao de excluir passageiro ainda nao implementada.\n";
+                cout << "Digite o codigo de passageiro que voce deseja atualizar: " << endl;
+                cin >> codigo;
+                p.excluirPassageiro(codigo, p);
                 break;
             case 5:
                 cout << "Retornando ao menu principal...\n";

@@ -20,12 +20,15 @@ public:
     string getEndereco();
 
     void setCodigo();
+    void setCodigo(string codigo);
+    
     string getCodigo();
 
     void mostrarPessoa();
     void adicionaPassageiro(Passageiro &p);
     void buscaPassageiro(string codigo);
     void atulizaPassageiro(string codigo, Passageiro &p);
+    void excluirPassageiro(string codigo, Passageiro &p);
 };
 
 #endif
