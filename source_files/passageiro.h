@@ -2,6 +2,7 @@
 #define PASSAGEIRO_H
 
 #include "pessoa.h"
+#include <vector>
 
 /**
  * Classe Passageiro que herda de Pessoa
@@ -23,7 +24,9 @@ public:
 
     void mostrarPessoa();
     void adicionaPassageiro(Passageiro &p);
-    // void atulizaPassageiro();
+    void buscaPassageiro(string codigo);
+
+    void atulizaPassageiro();
 };
 
 #endif

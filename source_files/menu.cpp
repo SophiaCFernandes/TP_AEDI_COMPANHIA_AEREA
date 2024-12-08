@@ -171,7 +171,7 @@ void menu_reserva() {
 void menu_passageiro(){
     bool exit = false;
     
-    string nome, telefone, endereco;
+    string nome, telefone, endereco, codigo;
     Passageiro p;
 
     while (!exit) {
@@ -191,11 +191,16 @@ void menu_passageiro(){
                 break;
             }
             case 2:
+                cout << "Digite o codigo de passageiro que voce deseja atualizar: " << endl;
+                cin >> codigo;
                 // p.atulizaPassageiro();
+
                 // cout << "Funcao de atualizar passageiro ainda nao implementada.\n";
                 break;
             case 3:
-                cout << "Funcao de buscar passageiro ainda nao implementada.\n";
+                cout << "Digite o codigo de passageiro que voce deseja buscar: " << endl;
+                cin >> codigo;
+                p.buscaPassageiro(codigo);
                 break;
             case 4:
                 cout << "Funcao de excluir passageiro ainda nao implementada.\n";

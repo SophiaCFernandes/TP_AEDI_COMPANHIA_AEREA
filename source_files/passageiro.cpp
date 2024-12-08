@@ -91,7 +91,53 @@ void Passageiro::adicionaPassageiro(Passageiro &p){
     }
 }
 
-// void Passageiro::atualizaPassageiro(){
+/**
+ * Metodo para buscar novos passageiros
+ */
+void Passageiro::buscaPassageiro(string codigo) {
+    bool encontrado = false;
+    string linha;
+
+    ifstream arq_entrada(FILE_PASSAGEIRO);
+
+    if (!arq_entrada.is_open()) {
+        cout << "Erro ao abrir o arquivo de passageiros para leitura" << endl;
+        return;
+    }
+
+    while (getline(arq_entrada, linha)) {
+        // Verifica se a linha contem o codigo do passageiro
+        if (linha.find(codigo + ",") == 0) {
+            encontrado = true;
+
+            // Divide a linha em partes para preencher os atributos
+            stringstream ss(linha);
+            string parte;
+            vector<string> partes;
+
+            while (getline(ss, parte, ',')) {
+                partes.push_back(parte);
+            }
+
+            // Preenche os atributos do objeto atual
+            if (partes.size() >= 4) { // Certifica que ha ao menos 4 partes
+                setCodigo();
+                setPessoa(partes[1]);    // Nome
+                setTelefone(partes[2]);  // Telefone
+                setEndereco(partes[3]);  // Endereco
+
+                cout << "Passageiro encontrado com as seguintes informacoes:\n";
+                mostrarPessoa();// Exibe as informacoes
+            }
+            break;
+        }
+    }
+
+    arq_entrada.close();
+
+    if (!encontrado) {
+        cout << "Passageiro com codigo " << codigo << " nao encontrado." << endl;
+    }
+}
 
 
-// }
